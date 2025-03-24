@@ -79,6 +79,7 @@ enum MeetingServices: String, Codable, CaseIterable {
     case calcom = "Cal Video"
     case zmPage = "zm.page"
     case livekit = "LiveKit Meet"
+    case dion = "Dion"
     case other = "Other"
 
     var localizedValue: String {
@@ -111,6 +112,7 @@ enum CreateMeetingLinks {
     static var gcalendar = URL(string: "https://calendar.google.com/calendar/u/0/r/eventedit")!
     static var outlook_live = URL(string: "https://outlook.live.com/calendar/0/action/compose")!
     static var outlook_office365 = URL(string: "https://outlook.office365.com/calendar/0/action/compose")!
+    static var dion = URL(string: "https://dion.vc/home")!
 }
 
 enum CreateMeetingServices: String, Defaults.Serializable, Codable, CaseIterable {
@@ -327,6 +329,7 @@ struct LinksRegex {
     let calcom =  try! NSRegularExpression(pattern: #"https?://app.cal\.com/video/[A-Za-z0-9./]+"#)
     let zmPage = try! NSRegularExpression(pattern: #"https?://([a-zA-Z0-9.]+)\.zm\.page"#)
     let livekit = try! NSRegularExpression(pattern: #"https?://meet[a-zA-Z0-9.]*\.livekit\.io/rooms/[a-zA-Z0-9-#]+"#)
+    let dion = try! NSRegularExpression(pattern: #"https?://dion\.vc/event/[^\s]*"#)
 }
 
 func getRegexForMeetingService(_ service: MeetingServices) -> NSRegularExpression? {
